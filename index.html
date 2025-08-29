@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight counter</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            transition: 0.2s linear;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aliceblue;
+        }
+        .main{
+            background-color: #fff;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        h1{
+            padding: 8px;
+            color: #fff;
+            font-size: 25px;
+            background-color: #001BB7;
+            width: 100%;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+
+        }
+        .input-field{
+            padding: 10px;
+            width: 100%;
+        }
+        label{
+            display: block;
+            color: #0046FF;
+            margin-top: 20px;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(242, 241, 241);
+            border-radius: 5px;
+            margin-top: 5px;
+                        box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+
+        }
+        input:hover{
+            border-bottom: 2px solid #0046FF;
+        }
+        button{
+            width: 40%;
+            margin-top: 20px;
+            padding: 8px;
+            background-color: #061a8c;
+            border: 0;
+            color: #fff;
+            font-weight: bold;
+            border-radius:5px ;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        }
+        button:hover{
+            transform: scale(1.04);
+            opacity: 0.8;
+        }
+
+        #inputValue{
+            margin-top: 15px;
+            color: gray;
+            font-size: 14px;
+        }
+        #result{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            color: #FF8040;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+    <h1>Paddy Weight Calculator</h1>
+    <div class="input-field">
+    <label for="netWeight">Net weight: </label>
+    <input type="text" id="netWeight" placeholder="Enter weight in kg">
+    </div>
+    <button onclick="countUnits()">Calculate</button>
+    <p id="inputValue"></p>
+    <p id="result"></p>
+    </div>
+</body>
+
+<script>
+const result = document.getElementById('result')
+function countUnits (){
+    const netWeight = Number(document.getElementById('netWeight').value)
+if(!netWeight || netWeight <=0){
+    result.innerHTML = 'దయచేసి సరైన బరువును నమోదు చేయండి.'
+
+   return;
+}
+ let bagWeight = 45.25
+    let bagsPerUnit = 20
+
+    let totalBags = netWeight/bagWeight
+    let totalUnits = Math.floor(totalBags/bagsPerUnit)
+    let remainingBags = totalBags - (totalUnits * bagsPerUnit)
+    let fullBags = Math.floor(remainingBags)
+    let partialBagWeight = ((remainingBags-fullBags)*bagWeight).toFixed(2)
+    
+document.getElementById('inputValue').innerHTML = `మీరూ నమోదు బరువు: ${netWeight} కిలోలు`
+
+    result.innerHTML = `${totalUnits} పుట్లు - ${fullBags} తూములు - ${partialBagWeight} కిలోలు`
+}
+</script>
+</html>
